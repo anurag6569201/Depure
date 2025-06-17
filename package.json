@@ -1,22 +1,25 @@
 {
-  "name": "depure",
-  "displayName": "Depure",
-  "description": "An intelligent Python dependency manager.",
-  "version": "0.0.1",
+  "name": "depure-ai",
+  "displayName": "Depure AI",
+  "description": "An intelligent Python dependency manager and file generator, powered by AI.",
+  "version": "2.0.0",
+  "publisher": "Anurag6569201",
   "engines": {
     "vscode": "^1.85.0"
   },
-  "publisher": "Anurag6569201",
   "main": "./extension.js",
   "activationEvents": [
     "onView:depureView"
   ],
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  },
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
           "id": "depure-sidebar",
-          "title": "Depure",
+          "title": "Depure AI",
           "icon": "icons/depure-icon.svg"
         }
       ]
@@ -25,10 +28,11 @@
       "depure-sidebar": [
         {
           "id": "depureView",
-          "name": "Dependency Manager",
+          "name": "Depure AI",
           "type": "webview"
         }
       ]
     }
-  }
+  },
+  "icon": "icons/depure-icon.svg"
 }
