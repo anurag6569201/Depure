@@ -1,0 +1,34 @@
+{
+  "name": "depure",
+  "displayName": "Depure",
+  "description": "An intelligent Python dependency manager.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "publisher": "Anurag6569201",
+  "main": "./extension.js",
+  "activationEvents": [
+    "onView:depureView"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "depure-sidebar",
+          "title": "Depure",
+          "icon": "icons/depure-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "depure-sidebar": [
+        {
+          "id": "depureView",
+          "name": "Dependency Manager",
+          "type": "webview"
+        }
+      ]
+    }
+  }
+}

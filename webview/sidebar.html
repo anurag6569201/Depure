@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{styleUri}}" rel="stylesheet">
+    <title>Depure</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Depure</h1>
+        <p class="tagline">Python Dependency Cleaner</p>
+        
+        <div class="section">
+            <label for="preset-select">Framework Preset:</label>
+            <select id="preset-select" name="presets">
+                <option value="generic">Python (Generic)</option>
+                <option value="django">Django</option>
+                <option value="flask">Flask</option>
+                <option value="fastapi">FastAPI</option>
+            </select>
+        </div>
+        
+        <div class="section">
+            <label>Select Project Source:</label>
+            <button id="select-file-btn" class="button">Select .py File</button>
+            <button id="select-folder-btn" class="button">Select Folder</button>
+            <button id="select-django-btn" class="button">Select Django Project</button>
+        </div>
+
+        <div class="section">
+            <label>Status:</label>
+            <p id="status-message">Ready. Select a source to begin.</p>
+        </div>
+
+        <hr>
+
+        <button id="generate-btn" class="button primary" disabled>Generate requirements.txt</button>
+    </div>
+
+    <script src="{{scriptUri}}"></script>
+</body>
+</html>
