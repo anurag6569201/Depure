@@ -1,0 +1,165 @@
+{
+  "name": "depure",
+  "displayName": "Depure (Context-Aware)",
+  "description": "An intelligent Python dependency analyzer that uses codebase structure and AI to distinguish local and external modules.",
+  "version": "1.0.0",
+  "publisher": "Anurag6569201",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:depureSidebar"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "depure.analyze",
+        "title": "Depure: Analyze Dependencies...",
+        "icon": "$(search-fuzzy)"
+      },
+      {
+        "command": "depure.analyzeSelected",
+        "title": "Depure: Analyze Selected Files/Folders"
+      },
+      {
+        "command": "depure.refresh",
+        "title": "Refresh Analysis",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "depure.updatePackage",
+        "title": "Update Package"
+      },
+      {
+        "command": "depure.updateAll",
+        "title": "Update All Packages",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "depure.viewOnPyPI",
+        "title": "View on PyPI"
+      },
+      {
+        "command": "depure.showDetails",
+        "title": "Show Details & Graph"
+      },
+      {
+        "command": "depure.generateRequirements",
+        "title": "Generate requirements.txt",
+        "icon": "$(save-all)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "depure.analyze",
+          "when": "view == depureSidebar",
+          "group": "navigation@1"
+        },
+        {
+          "command": "depure.refresh",
+          "when": "view == depureSidebar",
+          "group": "navigation@2"
+        },
+        {
+          "command": "depure.updateAll",
+          "when": "view == depureSidebar",
+          "group": "navigation@3"
+        },
+        {
+          "command": "depure.generateRequirements",
+          "when": "view == depureSidebar",
+          "group": "navigation@4"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "depure.analyzeSelected",
+          "when": "explorerResourceIsFolder || resourceLangId == python",
+          "group": "depure@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "depure.showDetails",
+          "when": "view == depureSidebar && viewItem.contextValue == 'dependency'",
+          "group": "inline"
+        },
+        {
+          "command": "depure.updatePackage",
+          "when": "view == depureSidebar && viewItem.contextValue == 'dependency' && viewItem.dependency.updateAvailable",
+          "group": "1_modification"
+        },
+        {
+          "command": "depure.viewOnPyPI",
+          "when": "view == depureSidebar && viewItem.contextValue == 'dependency'",
+          "group": "3_links"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "depure",
+          "title": "Depure",
+          "icon": "media/depure-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "depure": [
+        {
+          "id": "depureSidebar",
+          "name": "Dependencies",
+          "type": "tree",
+          "visibility": "visible"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Depure",
+      "properties": {
+        "depure.llm.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your API key from Google AI Studio. Required for analysis."
+        },
+        "depure.llm.endpoint": {
+          "type": "string",
+          "default": "https://generativelanguage.googleapis.com/v1beta/models",
+          "description": "The base endpoint URL for the Google Gemini API."
+        },
+        "depure.llm.model": {
+          "type": "string",
+          "default": "gemini-1.5-flash-latest",
+          "description": "The Gemini model to use for dependency analysis (e.g., gemini-1.5-pro-latest)."
+        },
+        "depure.analysis.excludePatterns": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/.*/**",
+            "**/venv/**",
+            "**/.venv/**",
+            "**/__pycache__/**",
+            "**/*.egg-info/**"
+          ],
+          "description": "Glob patterns for folders to exclude from analysis."
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "fast-glob": "^3.3.0",
+    "semver": "^7.5.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0"
+  }
+}
